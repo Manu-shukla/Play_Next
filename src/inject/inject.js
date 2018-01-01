@@ -30,9 +30,12 @@ chrome.omnibox.onInputEntered.addListener(function(text) {
     alert('You just typed "' + text + '"');
 });
 
-chrome.omnibox.onInputEntered.addListener(function(text) {
-    alert('You just typed "' + text + '"');
-});
+window.onload = function() {
+    var port = chrome.extension.connect({ name: "color-divs-port" });
+    document.getElementById("button").onclick = function() {
+        port.postMessage({ type: "color-divs"});
+    }
+}
 insert_main();
 // At the very start add the buttons
 insertButton();
